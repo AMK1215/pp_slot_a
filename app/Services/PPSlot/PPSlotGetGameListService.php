@@ -25,39 +25,73 @@ class PPSlotGetGameListService
      * Retrieve the list of casino games from Pragmatic Play.
      */
     public function getGameList($options = [])
-    {
-        // Log parameters before making the request
-        Log::info('Preparing Get Game List request', [
-            'secureLogin' => $this->secureLogin,
-            'options' => $options,
-            'integrationApiUrl' => $this->integrationApiUrl
-        ]);
-
-        $params = [
-            'secureLogin' => $this->secureLogin,
-            'options' => implode(',', $options),
-        ];
-
-        // Generate hash and log it
-        $hash = PPSlotHelper::generateHash($params, $this->secretKey);
-        $params['hash'] = $hash;
-
-        Log::info('Generated hash for request', ['hash' => $hash]);
-
-        // Make API request
-        $response = Http::asForm()->post($this->integrationApiUrl . '/getCasinoGames', $params);
-
-        if ($response->successful()) {
-            // Log successful response
-            Log::info('API call successful', ['response' => $response->json()]);
-            return $response->json();
-        }
-
-        // Log failed response
-        Log::error('API call failed', ['status' => $response->status(), 'response' => $response->body()]);
-
-        return ['error' => $response->status(), 'message' => 'Failed to retrieve game list.'];
+{
+    // Check if options is a string, if so, convert it to an array
+    if (is_string($options)) {
+        $options = explode(',', $options); // Convert to array
     }
+
+    $params = [
+        'secureLogin' => $this->secureLogin,
+        'options' => implode(',', $options), // optional fields such as GetFeatures, GetFrbDetails, etc.
+    ];
+
+    // Generate hash and log it
+    $hash = PPSlotHelper::generateHash($params, $this->secretKey);
+    $params['hash'] = $hash;
+
+    // Log the generated hash
+    Log::info('Generated hash for request', ['hash' => $hash]);
+
+    // Make API request
+    $response = Http::asForm()->post($this->integrationApiUrl . '/getCasinoGames', $params);
+
+    if ($response->successful()) {
+        // Log successful response
+        Log::info('API call successful', ['response' => $response->json()]);
+        return $response->json();
+    }
+
+    // Log failed response
+    Log::error('API call failed', ['status' => $response->status(), 'response' => $response->body()]);
+
+    return ['error' => $response->status(), 'message' => 'Failed to retrieve game list.'];
+}
+
+    // public function getGameList($options = [])
+    // {
+    //     // Log parameters before making the request
+    //     Log::info('Preparing Get Game List request', [
+    //         'secureLogin' => $this->secureLogin,
+    //         'options' => $options,
+    //         'integrationApiUrl' => $this->integrationApiUrl
+    //     ]);
+
+    //     $params = [
+    //         'secureLogin' => $this->secureLogin,
+    //         'options' => implode(',', $options),
+    //     ];
+
+    //     // Generate hash and log it
+    //     $hash = PPSlotHelper::generateHash($params, $this->secretKey);
+    //     $params['hash'] = $hash;
+
+    //     Log::info('Generated hash for request', ['hash' => $hash]);
+
+    //     // Make API request
+    //     $response = Http::asForm()->post($this->integrationApiUrl . '/getCasinoGames', $params);
+
+    //     if ($response->successful()) {
+    //         // Log successful response
+    //         Log::info('API call successful', ['response' => $response->json()]);
+    //         return $response->json();
+    //     }
+
+    //     // Log failed response
+    //     Log::error('API call failed', ['status' => $response->status(), 'response' => $response->body()]);
+
+    //     return ['error' => $response->status(), 'message' => 'Failed to retrieve game list.'];
+    // }
 }
 
 // class PPSlotGetGameListService
