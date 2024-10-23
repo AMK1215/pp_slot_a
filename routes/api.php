@@ -9,23 +9,15 @@ use App\Http\Controllers\Api\V1\Bank\BankController;
 use App\Http\Controllers\Api\V1\Game\GameController;
 use App\Http\Controllers\Api\V1\PromotionController;
 use App\Http\Controllers\Api\V1\Player\WagerController;
-use App\Http\Controllers\Api\V1\Webhook\BonusController;
-use App\Http\Controllers\Api\V1\Webhook\BuyInController;
-use App\Http\Controllers\Api\V1\Webhook\BuyOutController;
+
 use App\Http\Controllers\Api\V1\Game\LaunchGameController;
-use App\Http\Controllers\Api\V1\Webhook\JackPotController;
-use App\Http\Controllers\Api\V1\Webhook\PushBetController;
-use App\Http\Controllers\Api\V1\Webhook\PlaceBetController;
-use App\Http\Controllers\Api\V1\Webhook\RollbackController;
+
 use App\Http\Controllers\Api\Shan\ShanTransactionController;
-use App\Http\Controllers\Api\V1\Webhook\CancelBetController;
+
 use App\Http\Controllers\Api\V1\Player\TransactionController;
-use App\Http\Controllers\Api\V1\Webhook\GameResultController;
-use App\Http\Controllers\Api\V1\Webhook\GetBalanceController;
-use App\Http\Controllers\Api\V1\Webhook\MobileLoginController;
+
 use App\Http\Controllers\Api\V1\Game\DirectLaunchGameController;
-use App\Http\Controllers\Api\V1\Webhook\NewRedisPlaceBetController;
-use App\Http\Controllers\Api\V1\Webhook\VersionNewPlaceBetController;
+use App\Http\Controllers\Api\V1\PP\PPSlotGetGameListController;
 
 
 //login route post
@@ -49,26 +41,27 @@ Route::post('Seamless/PullReport', [LaunchGameController::class, 'pullReport']);
 Route::post('transactions', [ShanTransactionController::class, 'index'])->middleware('transaction');
 
 
-Route::group(['prefix' => 'Seamless'], function () {
-    Route::post('GetBalance', [GetBalanceController::class, 'getBalance']);
-    // Route::group(["middleware" => ["webhook_log"]], function(){
-    Route::post('GetGameList', [LaunchGameController::class, 'getGameList']);
-    Route::post('GameResult', [GameResultController::class, 'gameResult']);
-    Route::post('Rollback', [RollbackController::class, 'rollback']);
-    //Route::post('PlaceBet', [PlaceBetController::class, 'placeBet']);
-    //Route::post('PlaceBet', [NewRedisPlaceBetController::class, 'placeBetNew']);
-    Route::post('PlaceBet', [VersionNewPlaceBetController::class, 'placeBetNew']);
+Route::post('/pp-slot/get-games', [PPSlotGetGameListController::class, 'getGameList']);
+// Route::group(['prefix' => 'Seamless'], function () {
+//     Route::post('GetBalance', [GetBalanceController::class, 'getBalance']);
+//     // Route::group(["middleware" => ["webhook_log"]], function(){
+//     Route::post('GetGameList', [LaunchGameController::class, 'getGameList']);
+//     Route::post('GameResult', [GameResultController::class, 'gameResult']);
+//     Route::post('Rollback', [RollbackController::class, 'rollback']);
+//     //Route::post('PlaceBet', [PlaceBetController::class, 'placeBet']);
+//     //Route::post('PlaceBet', [NewRedisPlaceBetController::class, 'placeBetNew']);
+//     Route::post('PlaceBet', [VersionNewPlaceBetController::class, 'placeBetNew']);
 
 
-    Route::post('CancelBet', [CancelBetController::class, 'cancelBet']);
-    Route::post('BuyIn', [BuyInController::class, 'buyIn']);
-    Route::post('BuyOut', [BuyOutController::class, 'buyOut']);
-    Route::post('PushBet', [PushBetController::class, 'pushBet']);
-    Route::post('Bonus', [BonusController::class, 'bonus']);
-    Route::post('Jackpot', [JackPotController::class, 'jackPot']);
-    Route::post('MobileLogin', [MobileLoginController::class, 'MobileLogin']);
-    // });
-});
+//     Route::post('CancelBet', [CancelBetController::class, 'cancelBet']);
+//     Route::post('BuyIn', [BuyInController::class, 'buyIn']);
+//     Route::post('BuyOut', [BuyOutController::class, 'buyOut']);
+//     Route::post('PushBet', [PushBetController::class, 'pushBet']);
+//     Route::post('Bonus', [BonusController::class, 'bonus']);
+//     Route::post('Jackpot', [JackPotController::class, 'jackPot']);
+//     Route::post('MobileLogin', [MobileLoginController::class, 'MobileLogin']);
+//     // });
+// });
 
 Route::group(['middleware' => ['auth:sanctum', 'checkBanned']], function () {
     Route::get('home', [AuthController::class, 'home']);
