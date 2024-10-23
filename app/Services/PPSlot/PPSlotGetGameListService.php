@@ -46,6 +46,9 @@ class PPSlotGetGameListService
     // Make API request
     $response = Http::asForm()->post($this->integrationApiUrl . '/getCasinoGames', $params);
 
+    Log::info('Generated Url', ['url' => $response]);
+
+
     if ($response->successful()) {
         // Log successful response
         Log::info('API call successful', ['response' => $response->json()]);
