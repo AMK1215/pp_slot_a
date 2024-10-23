@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\PPSlot;
 
 use Illuminate\Support\Facades\Http;
 use App\Helpers\PPSlotHelper;

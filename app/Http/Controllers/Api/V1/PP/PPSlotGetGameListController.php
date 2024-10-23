@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\V1\PP;
 
 use App\Http\Controllers\Controller;
-use App\Services\PPSlotGetGameListService;
+use App\Services\PPSlot\PPSlotGetGameListService;
 use Illuminate\Http\Request;
 
 class PPSlotGetGameListController extends Controller
