@@ -1,8 +1,8 @@
 // to remove laravel log
-php -r "file_put_contents('/var/www/one_g_one_a/storage/logs/laravel.log', '');"
+php -r "file_put_contents('/var/www/pp_slot_a/storage/logs/laravel.log', '');"
 // created dev branch for kzt
 
-tail -f /var/www/one_g_one_a/storage/logs/laravel.log
+tail -f /var/www/pp_slot_a/storage/logs/laravel.log
 
 crontab -e
 
