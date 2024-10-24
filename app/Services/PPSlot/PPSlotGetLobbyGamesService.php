@@ -27,14 +27,24 @@ class PPSlotGetLobbyGamesService
     public function getLobbyGames($categories, $country = null)
     {
         // Prepare the parameters
-        $params = [
-            'secureLogin' => $this->secureLogin,
-            'categories' => implode(',', $categories), // list of categories like 'all', 'new', 'hot'
-        ];
+        // Check if categories is a string, if so, convert it to an array
+    if (is_string($categories)) {
+        $categories = explode(',', $categories); // Convert to array
+    }
 
-        if ($country) {
-            $params['country'] = $country; // optional country code
-        }
+    $params = [
+        'secureLogin' => $this->secureLogin,
+        'categories' => implode(',', $categories), // Ensure it's an array before using implode
+        'country' => $country,
+    ];
+        // $params = [
+        //     'secureLogin' => $this->secureLogin,
+        //     'categories' => implode(',', $categories), // list of categories like 'all', 'new', 'hot'
+        // ];
+
+        // if ($country) {
+        //     $params['country'] = $country; // optional country code
+        // }
 
         // Generate the hash
         $hash = PPSlotHelper::generateHash($params, $this->secretKey);
