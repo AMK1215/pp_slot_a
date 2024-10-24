@@ -113,3 +113,4 @@ to get game list curl example curl --location 'https://api.prerelease-env.biz/In
 --data-urlencode 'categories=all,new,hot' \
 --data-urlencode 'country=ES' \
 --data-urlencode 'hash=395be09707a5ee9087d1ce04ff4823c7'
+--------------------

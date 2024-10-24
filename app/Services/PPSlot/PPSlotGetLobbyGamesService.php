@@ -26,14 +26,13 @@ class PPSlotGetLobbyGamesService
      */
     public function getLobbyGames($categories = 'all', $country = null)
 {
-    // Check if categories is a string, if so, convert it to an array
     if (is_string($categories)) {
-        $categories = explode(',', $categories); // Convert to array
+         $categories = explode(',', $categories); // Convert to array
     }
-
+    // Prepare the parameters
     $params = [
         'secureLogin' => $this->secureLogin,
-        'categories' => implode(',', $categories), // Ensure it's an array before using implode
+        'categories' => implode(',', $categories),
         'country' => $country,
     ];
 
@@ -41,30 +40,20 @@ class PPSlotGetLobbyGamesService
     $hash = PPSlotHelper::generateHash($params, $this->secretKey);
     $params['hash'] = $hash;
 
-    // Log API call before sending
-    Log::info('Sending API request', [
-        'url' => $this->integrationApiUrl . '/getLobbyGames',
-        'params' => $params
-    ]);
+    // Log and send the API request
+    Log::info('Sending API request', ['params' => $params]);
 
-    // Make API request with headers
     $response = Http::withHeaders([
         'Content-Type' => 'application/x-www-form-urlencoded',
         'Host' => 'api.prerelease-env.biz',
         'Cache-Control' => 'no-cache',
     ])->asForm()->post($this->integrationApiUrl . '/getLobbyGames', $params);
 
-    // Log the response from the API
-    Log::info('API response', [
-        'status' => $response->status(),
-        'response_body' => $response->body(),
-    ]);
-
     if ($response->successful()) {
         return $response->json();
     }
 
-    // Log failed response
+    // Log and handle failed response
     Log::error('API call failed', [
         'status' => $response->status(),
         'response_body' => $response->body(),
@@ -72,6 +61,55 @@ class PPSlotGetLobbyGamesService
 
     return ['error' => $response->status(), 'message' => 'Failed to retrieve lobby games.'];
 }
+
+//     public function getLobbyGames($categories = 'all', $country = null)
+// {
+//     // Check if categories is a string, if so, convert it to an array
+//     if (is_string($categories)) {
+//         $categories = explode(',', $categories); // Convert to array
+//     }
+
+//     $params = [
+//         'secureLogin' => $this->secureLogin,
+//         'categories' => implode(',', $categories), // Ensure it's an array before using implode
+//         'country' => $country,
+//     ];
+
+//     // Generate hash
+//     $hash = PPSlotHelper::generateHash($params, $this->secretKey);
+//     $params['hash'] = $hash;
+
+//     // Log API call before sending
+//     Log::info('Sending API request', [
+//         'url' => $this->integrationApiUrl . '/getLobbyGames',
+//         'params' => $params
+//     ]);
+
+//     // Make API request with headers
+//     $response = Http::withHeaders([
+//         'Content-Type' => 'application/x-www-form-urlencoded',
+//         'Host' => 'api.prerelease-env.biz',
+//         'Cache-Control' => 'no-cache',
+//     ])->asForm()->post($this->integrationApiUrl . '/getLobbyGames', $params);
+
+//     // Log the response from the API
+//     Log::info('API response', [
+//         'status' => $response->status(),
+//         'response_body' => $response->body(),
+//     ]);
+
+//     if ($response->successful()) {
+//         return $response->json();
+//     }
+
+//     // Log failed response
+//     Log::error('API call failed', [
+//         'status' => $response->status(),
+//         'response_body' => $response->body(),
+//     ]);
+
+//     return ['error' => $response->status(), 'message' => 'Failed to retrieve lobby games.'];
+// }
 
     // public function getLobbyGames($categories, $country = null)
     // {
