@@ -103,3 +103,13 @@ PROVIDER_INITIAL_BALANCE=43645
 [2024-10-23 05:34:00] local.INFO: Hash generated {"hash":"df11a2825f80d4ecc490c7c23c407726"}
 [2024-10-23 05:34:00] local.INFO: Generated hash for request {"hash":"df11a2825f80d4ecc490c7c23c407726"}
 [2024-10-23 05:34:00] local.INFO: Sending API request {"url":"https://api.prerelease-env.biz/IntegrationService/v3/http/CasinoGameAPI/getCasinoGames","params":{"secureLogin":"dlghtmnmr_panda666","options":"GetFeatures,GetFrbDetails","hash":"df11a2825f80d4ecc490c7c23c407726"}}
+
+GetGameLobby url
+https://api.prerelease-env.biz/IntegrationService/v3/http/CasinoGameAPI/getLobbyGames%22,%22params%22:%22secureLogin%22:%22dlghtmnmr_panda666%22,%22categories%22:%22all,new,hot%22,%22country%22:%22ES%22,%22hash%22:%227f318e59ee64efd9836d556f9665d48f
+-------------
+to get game list curl example curl --location 'https://api.prerelease-env.biz/IntegrationService/v3/http/CasinoGameAPI/getLobbyGames' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'secureLogin=dlghtmnmr_panda666' \
+--data-urlencode 'categories=all,new,hot' \
+--data-urlencode 'country=ES' \
+--data-urlencode 'hash=395be09707a5ee9087d1ce04ff4823c7'
