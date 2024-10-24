@@ -24,8 +24,6 @@ class PPSlotGetLobbyGamesService
     /**
      * Retrieve the list of casino games from the Pragmatic Play lobby.
      */
-
-
     public function getLobbyGames($categories = 'all', $country = null)
 {
     if (is_string($categories)) {
