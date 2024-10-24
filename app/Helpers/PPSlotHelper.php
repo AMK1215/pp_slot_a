@@ -15,27 +15,53 @@ class PPSlotHelper
      * Generate hash for Pragmatic Play API request
      */
     public static function generateHash($params, $secretKey)
-    {
-        // Step 1: Remove the 'hash' key from the params if it exists
-        unset($params['hash']);
+{
+    // Remove 'hash' if it exists
+    unset($params['hash']);
 
-        // Step 2: Sort parameters by keys
-        ksort($params);
+    // Sort parameters by key
+    ksort($params);
 
-        // Step 3: Append parameters into a query string (key=value&key2=value2)
-        $queryString = http_build_query($params);
+    // Build query string (key=value&key=value)
+    $queryString = urldecode(http_build_query($params)); // Use urldecode to prevent encoding issues
 
-        // Log the query string before appending the secret key
-        Log::info('Query string with secret key', ['query_string_with_key' => $queryString . $secretKey]);
+    // Log the query string for verification
+    Log::info('Query string before appending secret key', ['query_string' => $queryString]);
 
-        // Step 4: Append the secret key and generate MD5 hash
-        $hash = md5($queryString . $secretKey);
+    // Append the secret key
+    $queryString .= $secretKey;
 
-        // Log the generated hash
-        Log::info('Hash generated', ['hash' => $hash]);
+    // Generate MD5 hash
+    $hash = md5($queryString);
 
-        return $hash;
-    }
+    // Log the generated hash
+    Log::info('Hash generated', ['hash' => $hash]);
+
+    return $hash;
+}
+
+    // public static function generateHash($params, $secretKey)
+    // {
+    //     // Step 1: Remove the 'hash' key from the params if it exists
+    //     unset($params['hash']);
+
+    //     // Step 2: Sort parameters by keys
+    //     ksort($params);
+
+    //     // Step 3: Append parameters into a query string (key=value&key2=value2)
+    //     $queryString = http_build_query($params);
+
+    //     // Log the query string before appending the secret key
+    //     Log::info('Query string with secret key', ['query_string_with_key' => $queryString . $secretKey]);
+
+    //     // Step 4: Append the secret key and generate MD5 hash
+    //     $hash = md5($queryString . $secretKey);
+
+    //     // Log the generated hash
+    //     Log::info('Hash generated', ['hash' => $hash]);
+
+    //     return $hash;
+    // }
 }
 
 // class PPSlotHelper
