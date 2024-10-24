@@ -42,8 +42,8 @@ Route::post('Seamless/PullReport', [LaunchGameController::class, 'pullReport']);
 Route::post('transactions', [ShanTransactionController::class, 'index'])->middleware('transaction');
 
 
-Route::post('/pp-slot/get-games', [PPSlotGetGameListController::class, 'getGameList']);
-Route::post('/pp-slot/get-lobby-games', [PPSlotGetLobbyGamesController::class, 'getLobbyGames']);
+Route::post('/get-games', [PPSlotGetGameListController::class, 'getGameList']);
+Route::post('/get-lobby-games', [PPSlotGetLobbyGamesController::class, 'getLobbyGames']);
 
 // Route::group(['prefix' => 'Seamless'], function () {
 //     Route::post('GetBalance', [GetBalanceController::class, 'getBalance']);
