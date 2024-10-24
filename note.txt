@@ -94,3 +94,12 @@ SEAMLESS_PASSWORD=pass@word1
 SEAMLESS_SECRET_KEY=bsWs4A
 SEAMLESS_API_URL=https://prodmd.9977997.com
 PROVIDER_INITIAL_BALANCE=43645
+
+
+
+[2024-10-23 05:24:25] local.INFO: Get Game List Service response {"response_data":{"error":403,"message":"Failed to retrieve game list."}}
+[2024-10-23 05:34:00] local.INFO: Incoming Get Game List request {"request_data":{"secureLogin":"dlghtmnmr_panda666","hash":"df11a2825f80d4ecc490c7c23c407726","options":"GetFeatures,GetFrbDetails"}}
+[2024-10-23 05:34:00] local.INFO: Generating hash with params {"params":{"secureLogin":"dlghtmnmr_panda666","options":"GetFeatures,GetFrbDetails"},"secretKey":"KSCpuQjg9G8An3qY"}
+[2024-10-23 05:34:00] local.INFO: Hash generated {"hash":"df11a2825f80d4ecc490c7c23c407726"}
+[2024-10-23 05:34:00] local.INFO: Generated hash for request {"hash":"df11a2825f80d4ecc490c7c23c407726"}
+[2024-10-23 05:34:00] local.INFO: Sending API request {"url":"https://api.prerelease-env.biz/IntegrationService/v3/http/CasinoGameAPI/getCasinoGames","params":{"secureLogin":"dlghtmnmr_panda666","options":"GetFeatures,GetFrbDetails","hash":"df11a2825f80d4ecc490c7c23c407726"}}

@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\V1\Player\TransactionController;
 
 use App\Http\Controllers\Api\V1\Game\DirectLaunchGameController;
 use App\Http\Controllers\Api\V1\PP\PPSlotGetGameListController;
+use App\Http\Controllers\Api\V1\PP\PPSlotGetLobbyGamesController;
 
 
 //login route post
@@ -42,6 +43,8 @@ Route::post('transactions', [ShanTransactionController::class, 'index'])->middle
 
 
 Route::post('/pp-slot/get-games', [PPSlotGetGameListController::class, 'getGameList']);
+Route::post('/pp-slot/get-lobby-games', [PPSlotGetLobbyGamesController::class, 'getLobbyGames']);
+
 // Route::group(['prefix' => 'Seamless'], function () {
 //     Route::post('GetBalance', [GetBalanceController::class, 'getBalance']);
 //     // Route::group(["middleware" => ["webhook_log"]], function(){
